@@ -1,0 +1,23 @@
+body {
+    background: linear-gradient(to right, #6a11cb, #2575fc); 
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9); 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.table {
+    font-size: 0.8rem; 
+}
+
+.table th, .table td {
+    padding: 0.5rem; 
+}
