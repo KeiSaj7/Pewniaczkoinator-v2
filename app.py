@@ -6,12 +6,12 @@ from bookmaker_service import BookmakerService
 
 class App(flask.Flask):
     def __init__(self, *args, **kwargs):
+        self.db_manager = kwargs.get('db_manager', DBService())
+        self.bookmaker_service = kwargs.get('bookmaker_service', BookmakerService(db_manager=self.db_manager, nba_service=None))
+        self.nba_service = kwargs.get('nba_service', NBAService(db_manager=self.db_manager, bookmaker_manager=self.bookmaker_service))
+        self.bookmaker_service.nba_service = self.nba_service
         super(App, self).__init__(*args, **kwargs)
         self.config['SECRET_KEY'] = 'SECRET_KEY'
-        self.db_manager = DBService()
-        self.bookmaker_service = BookmakerService(db_manager=self.db_manager, nba_service=None)
-        self.nba_service = NBAService(db_manager=self.db_manager, bookmaker_manager=self.bookmaker_service)
-        self.bookmaker_service.nba_service = self.nba_service
         self.setup_routes()
 
     def setup_routes(self):
